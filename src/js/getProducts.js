@@ -1,5 +1,5 @@
 import { GET_PRODUCT, $, $$ } from "./constant.js";
-import { setLocal, getLocal } from "./function.js";
+import { setLocal } from "./function.js";
 
 async function loadProducts() {
   try {

@@ -3,7 +3,7 @@ import { setLocal, getLocal } from "./function.js";
 
 async function getToCart() {
   try {
-    const localCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const localCart = getLocal("cart");
 
     const handleDecrease = (id) => {
       const result = localCart.find((element) => element.id === +id);
@@ -67,9 +67,9 @@ async function getToCart() {
         </tr>
       `;
       });
-    } else {
+    } else
       html = `<tr><td colspan="100%" style="text-align: center" >Không có sản phẩm nào trong giỏ hàng. <a href="/list-category-product.html"> Đi đến trang mua hàng </a> </td></tr>`;
-    }
+
     $("#js-cart-table").innerHTML =
       localCart.length > 0 ? html.join(" ") : html;
 
@@ -84,6 +84,12 @@ async function getToCart() {
     $$(".deleteProduct").forEach((item) => {
       item.addEventListener("click", () => handleDelete(item.dataset.id));
     });
+
+    if (localCart.length > 0) {
+      $("#js-checkout").onclick = () => {
+        window.location.href = "./address.html";
+      };
+    }
   } catch (e) {
     console.log(e);
   }
