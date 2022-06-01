@@ -4,16 +4,14 @@ const regexEmail = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
 const regexPhoneNumber = new RegExp(/^[0-9]{10,11}$/);
 
 function saveAddressToLocal() {
-  let checkEmail = true;
-  let checkPhoneNumber = true;
+  let checkEmail = false;
+  let checkPhoneNumber = false;
   let dataUser = getLocal("address");
 
-  if (dataUser) {
-    $("#name").value = dataUser.name;
-    $("#email").value = dataUser.email;
-    $("#phone").value = dataUser.phone;
-    $("#address").value = dataUser.address;
-  }
+  $("#name").value = dataUser.name || "";
+  $("#email").value = dataUser.email || "";
+  $("#phone").value = dataUser.phone || "";
+  $("#address").value = dataUser.address || "";
 
   $("#phone").onblur = function () {
     if (regexPhoneNumber.test($("#phone")?.value)) {

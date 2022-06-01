@@ -1,5 +1,6 @@
 import { GET_PRODUCT, $, $$ } from "./constant.js";
 import { setLocal } from "./function.js";
+import { showErrorToast, showSuccessToast } from "./toast.js";
 
 async function loadProducts() {
   try {
@@ -7,6 +8,7 @@ async function loadProducts() {
     const payload = [];
 
     function addToCart(id) {
+      showSuccessToast("Thêm sản phẩm thành công");
       const result = data.find((element) => element.id === +id);
 
       const product = payload.filter(
@@ -19,7 +21,7 @@ async function loadProducts() {
           amount: 1,
         });
       }
-      new bootstrap.Toast(document.querySelector("#basicToast")).show();
+      // new bootstrap.Toast(document.querySelector("#basicToast")).show();
       setLocal({ key: "cart", value: payload });
     }
 
